@@ -10,3 +10,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 openai.api_key = os.getenv('API_TOKEN')
+
+def download_youtube_video(url, output_path='video.mp4'):
+    yt = pytube.YouTube(url)
+    stream = yt.streams.get_highest_resolution()
+    print(f"Baixando o vídeo: {stream.title}")
+    stream.download(filename=output_path)
+
+def extract_audio_from_video(video_path, audio_path='audio.wav'):
+    print("Extraindo áudio...")
+    ffmpeg_extract_audio(video_path, audio_path)
