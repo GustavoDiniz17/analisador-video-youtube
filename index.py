@@ -36,4 +36,29 @@ def summarize_text(text):
         max_tokens=150
     )
     return response.choices[0].text.strip()
+def main():
+    video_url = input("Insira a URL do vídeo do YouTube: ")
+    
+    # Baixar o vídeo
+    download_youtube_video(video_url)
+    
+    # Extrair áudio do vídeo
+    extract_audio_from_video('video.mp4', 'audio.wav')
+    
+    # Transcrever o áudio
+    transcript = transcribe_audio('audio.wav')
+    
+    # Resumir o texto
+    summary = summarize_text(transcript)
+    
+    # Mostrar o resumo
+    print("\nResumo do vídeo:")
+    print(summary)
+    
+    # Limpar arquivos temporários
+    os.remove('video.mp4')
+    os.remove('audio.wav')
+
+if _name_ == '_main_':
+    main()
     
